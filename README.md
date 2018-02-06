@@ -2,8 +2,8 @@
 vue移动端下拉分页插件，其本质是使用指令实现。
 
 ## Feature
- [x] scroll节流   
- [x] 分页逻辑
+ - [x] scroll节流   
+ - [x] 分页逻辑
 
 ## Usage
 
@@ -46,7 +46,5 @@ pageSize: 20,
 // 以此可以来判断是否加载完成
 noData: false
 ```
-
-回调说明
 
 
