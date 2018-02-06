@@ -1,4 +1,9 @@
 ## Vue-mobile-page
+<p>
+  <a href="https://www.npmjs.com/package/vue-mobile-page"><img src="https://img.shields.io/npm/dm/vue-mobile-page.svg" alt="Downloads"></a>
+  <a href="https://www.npmjs.com/package/vue-mobile-page"><img src="https://img.shields.io/npm/v/vue-mobile-page.svg" alt="Version"></a>
+</p>
+
 vue移动端下拉分页插件，其本质是使用指令实现。
 
 ## Feature
