@@ -10,6 +10,12 @@ vue移动端下拉分页插件，其本质是使用指令实现。
 install
 ```
 npm install vue-mobile-page --save
+
+import page from 'vue-mobile-page'
+...
+{
+  mixins: [page]
+}
 ```
 
 wrapper 分页滚动容器，固定的高度，用来获取scrollTop  
