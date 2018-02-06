@@ -1,4 +1,4 @@
-## vue-mobile-page
+## Vue-mobile-page
 vue移动端下拉分页插件，其本质是使用指令实现。
 
 ## Feature
