@@ -7,8 +7,8 @@ vue移动端下拉分页插件，其本质是使用指令实现。
 
 ## Usage
 
-install
 ```
+// install
 npm install vue-mobile-page --save
 
 import page from 'vue-mobile-page'
