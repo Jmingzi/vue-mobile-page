@@ -1,16 +1,18 @@
 <template>
-  <div id="app">
-    <div class="wrapper" v-page="{ wrapperCls: 'wrapper-item', callback: getList }">
-      <div class="wrapper-item">
-        <div class="demo-item" v-for="item in list">{{item.title}}</div>
-      </div>
+    <div id="app">
+        <div class="wrapper" v-page="{ wrapperCls: 'wrapper-item', callback: getList }">
+            <div class="wrapper-item">
+                <slide-del v-for="(item, i) in list" :key="i">
+                    <div slot="item" class="demo-item">{{item.title}}</div>
+                </slide-del>
+            </div>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
-  // import page from './mixins/page'
   import page from '../m-dist/mPage'
+  import SlideDel from '../m-dist/mSlideDelete'
 
   export default {
     name: 'app',
@@ -40,21 +42,22 @@
       }
     },
     components: {
+      SlideDel
     }
   }
 </script>
 
 <style>
-  .demo-item {
-    padding: 20px 0;
-    border-bottom: 1px #ccc solid;
-  }
-  .wrapper {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    bottom: 0;
-    overflow: auto;
-  }
+    .demo-item {
+        padding: 20px 0;
+        border-bottom: 1px #ccc solid;
+    }
+    .wrapper {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        bottom: 0;
+        overflow: auto;
+    }
 </style>

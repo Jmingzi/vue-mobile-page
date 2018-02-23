@@ -1,14 +1,17 @@
 const webpack = require('webpack')
 const path = require('path')
+const vueLoaderConfig = require('./build/vue-loader.conf')
 
 module.exports = {
   entry: {
-    mPage: './src/mixins/page.js'
+    // mPage: './src/mixins/page.js'
+    mSlideDelete: './src/components/SlideDelete.vue'
   },
   output: {
     path: path.resolve(__dirname, './m-dist'),
     filename: '[name].js',
-    library: 'mPage',
+    // library: 'mPage',
+    library: 'mSlideDelete',
     libraryTarget: 'umd'
   },
   module: {
@@ -17,6 +20,11 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
         include: [path.resolve(__dirname, './src/mixins')]
+      },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: vueLoaderConfig
       }
     ]
   },
