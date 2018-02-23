@@ -4,7 +4,7 @@
         <slot name="item">
         </slot>
       </div>
-      <div class="m-slide__del">
+      <div class="m-slide__del" @click="$emit('del-click')">
         <span>
           <slot name="del">删除</slot>
         </span>
