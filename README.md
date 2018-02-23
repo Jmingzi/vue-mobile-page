@@ -1,11 +1,27 @@
-## vue-mobile-page
+## Vue-mobile-page
+<p>
+  <a href="https://www.npmjs.com/package/vue-mobile-page"><img src="https://img.shields.io/npm/dm/vue-mobile-page.svg" alt="Downloads"></a>
+  <a href="https://www.npmjs.com/package/vue-mobile-page"><img src="https://img.shields.io/npm/v/vue-mobile-page.svg" alt="Version"></a>
+</p>
+
 vue移动端下拉分页插件，其本质是使用指令实现。
 
 ## Feature
- [x] scroll节流   
- [x] 分页逻辑
+ - [x] scroll节流   
+ - [x] 分页逻辑
 
 ## Usage
+
+```
+// install
+npm install vue-mobile-page --save
+
+import page from 'vue-mobile-page'
+...
+{
+  mixins: [page]
+}
+```
 
 wrapper 分页滚动容器，固定的高度，用来获取scrollTop  
 wrapper-item 分页包裹容器，用来获取高度
@@ -46,7 +62,5 @@ pageSize: 20,
 // 以此可以来判断是否加载完成
 noData: false
 ```
-
-回调说明
 
 
