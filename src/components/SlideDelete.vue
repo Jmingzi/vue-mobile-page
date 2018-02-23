@@ -4,7 +4,7 @@
         <slot name="item">
         </slot>
       </div>
-      <div class="m-slide__del" @click="$emit('del-click')">
+      <div :class="`m-slide__del ${delCls}`" @click="$emit('del-click')">
         <span>
           <slot name="del">删除</slot>
         </span>
@@ -25,6 +25,10 @@
       threshold: {
         type: Number,
         default: 35
+      },
+      delCls: {
+        type: String,
+        default: 'm-slide__del-red'
       }
     },
 
@@ -111,7 +115,6 @@
       bottom: 0;
       width: 70px;
       color: #fff;
-      background-color: #fb4455;
       z-index: 0;
 
       span {
@@ -120,6 +123,10 @@
         left: 50%;
         transform: translate(-50%, -50%);
       }
+    }
+
+    .m-slide__del-red {
+      background-color: #f23030;
     }
   }
 </style>
