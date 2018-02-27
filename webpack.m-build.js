@@ -4,14 +4,12 @@ const vueLoaderConfig = require('./build/vue-loader.conf')
 
 module.exports = {
   entry: {
-    // mPage: './src/mixins/page.js'
-    mSlideDelete: './src/components/SlideDelete.vue'
+    mPage: './src/mixins/page.js'
   },
   output: {
     path: path.resolve(__dirname, './m-dist'),
     filename: '[name].js',
-    // library: 'mPage',
-    library: 'mSlideDelete',
+    library: 'mPage',
     libraryTarget: 'umd'
   },
   module: {
