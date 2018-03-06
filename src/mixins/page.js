@@ -24,7 +24,8 @@ export default {
             childNodeWrapperHeight = childNode.offsetHeight
             if (
               wrapperHeight + e.target.scrollTop >= childNodeWrapperHeight &&
-              !vm.noData
+              !vm.noData &&
+              childNodeWrapperHeight !== 0
             ) {
               vm.currentPage ++
               callback && callback((data)=> {
