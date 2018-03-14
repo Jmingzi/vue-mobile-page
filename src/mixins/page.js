@@ -3,7 +3,8 @@ export default {
     return {
       currentPage: 1,
       pageSize: 20,
-      noData: false
+      noData: false,
+      pageLoading: false
     }
   },
   directives: {
@@ -14,6 +15,7 @@ export default {
         let { wrapperCls, callback } = binding.value
         let childNode = el.childNodes[0]
         let vm = vNode.context
+
         if (
           wrapperCls &&
           childNode &&
@@ -23,17 +25,17 @@ export default {
             wrapperHeight = el.offsetHeight
             childNodeWrapperHeight = childNode.offsetHeight
             if (
-              wrapperHeight + e.target.scrollTop >= childNodeWrapperHeight &&
+              !vm.pageLoading &&
               !vm.noData &&
+              wrapperHeight + e.target.scrollTop >= childNodeWrapperHeight &&
               childNodeWrapperHeight !== 0
             ) {
+              vm.pageLoading = true
               vm.currentPage ++
               callback && callback((data)=> {
+                vm.pageLoading = false
                 if (data instanceof Array) {
                   vm.noData = data.length === 0
-                  // if (vm.noData) {
-                  //   console.log(vm.currentPage === 2 ? 'no data' : 'no more data')
-                  // }
                 } else {
                   console.error('params type must be an Array for page callback')
                 }
