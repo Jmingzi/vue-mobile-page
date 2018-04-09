@@ -22,7 +22,6 @@ export default {
           childNode.classList.contains(wrapperCls)
         ) {
           el.addEventListener('touchmove', vm.throttle(() => {
-            // console.log('scroll', el.scrollTop)
             wrapperHeight = el.offsetHeight
             childNodeWrapperHeight = childNode.offsetHeight
             if (
