@@ -39,7 +39,9 @@ wrapper-item 分页包裹容器，用来获取高度
   // 包裹容器类名
   wrapperCls: 'wrapper-item', 
   // 回调函数
-  callback: getList 
+  callback: getList,
+  // 截流waitTime
+  throttleTime: 500
 }
 ```
 
