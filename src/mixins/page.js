@@ -12,7 +12,7 @@ export default {
       bind(el, binding, vNode) {
         // check wrapper class
         let wrapperHeight, childNodeWrapperHeight
-        let { wrapperCls, callback } = binding.value
+        let { wrapperCls, callback, throttleTime } = binding.value
         let childNode = el.childNodes[0]
         let vm = vNode.context
 
@@ -21,13 +21,14 @@ export default {
           childNode &&
           childNode.classList.contains(wrapperCls)
         ) {
-          el.addEventListener('scroll', vm.throttle((e)=> {
+          el.addEventListener('touchmove', vm.throttle(() => {
+            // console.log('scroll', el.scrollTop)
             wrapperHeight = el.offsetHeight
             childNodeWrapperHeight = childNode.offsetHeight
             if (
               !vm.pageLoading &&
               !vm.noData &&
-              wrapperHeight + e.target.scrollTop >= childNodeWrapperHeight &&
+              wrapperHeight + el.scrollTop >= childNodeWrapperHeight &&
               childNodeWrapperHeight !== 0
             ) {
               vm.pageLoading = true
@@ -41,7 +42,7 @@ export default {
                 }
               })
             }
-          }, 10))
+          }, throttleTime || 500), { trailing: true, leading: true })
         } else {
           console.log('you should give wrapper class name')
         }
@@ -49,38 +50,45 @@ export default {
     }
   },
   methods: {
-    throttle(fn, time) {
-      let now, timer, args, context
-      let previousTime = 0
-      let later = function () {
-        clearTimeout(timer)
-        fn.apply(context, args)
-        timer = context = args = null
+    throttle(func, wait, options) {
+      let timeout, context, args, result
+      let previous = 0
+      if (!options) options = {}
+
+      let later = function() {
+        previous = options.leading === false ? 0 : Date.now()
+        timeout = null
+        result = func.apply(context, args)
+        if (!timeout) context = args = null
       }
 
-      return function () {
-        args = arguments
+      let throttled = function() {
+        let now = Date.now()
+        if (!previous && options.leading === false) previous = now
+        let remaining = wait - (now - previous)
         context = this
-        now = Date.now()
-
-        if (!timer && previousTime === 0) {
-          previousTime = now
-        }
-
-        let remainTime = time - (now - previousTime)
-        // 判断时间间隔
-        if (remainTime <= 0) {
-          previousTime = now
-          if (timer) {
-            clearTimeout(timer)
-            timer = null
+        args = arguments
+        if (remaining <= 0 || remaining > wait) {
+          if (timeout) {
+            clearTimeout(timeout)
+            timeout = null
           }
-          fn.apply(context, args)
-          context = args = null
-        } else if (!timer) {
-          timer = setTimeout(later, remainTime)
+          previous = now
+          result = func.apply(context, args)
+          if (!timeout) context = args = null
+        } else if (!timeout && options.trailing !== false) {
+          timeout = setTimeout(later, remaining)
         }
+        return result
       }
+
+      throttled.cancel = function() {
+        clearTimeout(timeout)
+        previous = 0
+        timeout = context = args = null
+      }
+
+      return throttled
     }
   }
 }

@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import page from '../m-dist/mPage'
+  import page from './mixins/page'
   import SlideDel from '../m-dist/mSlideDelete'
 
   export default {
