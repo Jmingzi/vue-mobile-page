@@ -1,4 +1,4 @@
-### Vue-mobile-page
+### vue-mobile-page
 <p>
   <a href="https://www.npmjs.com/package/vue-mobile-page"><img src="https://img.shields.io/npm/dm/vue-mobile-page.svg" alt="Downloads"></a>
   <a href="https://www.npmjs.com/package/vue-mobile-page"><img src="https://img.shields.io/npm/v/vue-mobile-page.svg" alt="Version"></a>
@@ -7,29 +7,24 @@
 vue移动端下拉分页插件，其本质是使用指令实现。
 
 ### Feature
- - [x] scroll节流   
- - [x] 分页逻辑
+ - [x] 节流函数throttle控制touchmove
+ - [x] beforeCallback
+ - [x] afterCallback
+ - [x] loading
+ - [x] 分页请求开关pageOpen
 
-### Usage
+### Install
 ```
-// install
 npm install vue-mobile-page --save
-
-import page from 'vue-mobile-page'
-...
-{
-  mixins: [ page ]
-}
 ```
 
 ### 工作流程
-`binding`指令的时候会去执行一次`beforeCallback` -> `callback` -> `afterCallback`
-
+`binding`指令的时候会去执行一次`beforeCallback` -> `callback` -> `afterCallback`流程。  
 其他场景——需要手动执行，提供了`doCallback`(详见method说明)方法
 
-### Dom结构
-wrapper 分页滚动容器，固定的高度，用来获取scrollTop  
-wrapper-item 分页包裹容器，用来获取高度
+### Usage
+wrapper 父容器，固定的高度，用来获取scrollTop  
+wrapper-item 包裹子容器，用来获取高度offsetHeight
 
 ```vue
 <template>
@@ -49,20 +44,25 @@ wrapper-item 分页包裹容器，用来获取高度
 </template>
 
 <script>
+import page from 'vue-mobile-page'
+
 export default {
+  mixins: [ page ],
+  
   methods: {
     getList(pageCb) {
       console.log('currentPage', this.currentPage)
       let currentPageData = []
+      // 此回调必须，用来更新分页状态
       pageCb && pageCb(currentPageData)
     },
     
     beforeGetList() {
-      
+      // ...
     },
     
     afterGetList(isNoData) {
-      
+      // ...
     }
   }
 }
