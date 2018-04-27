@@ -57,10 +57,11 @@ export default {
             vm.throttle(() => {
               wrapperHeight = el.offsetHeight
               childNodeWrapperHeight = childNode.offsetHeight
-
+              // console.log(wrapperHeight, el.scrollTop, childNodeWrapperHeight)
               if (
                 !vm.pageLoading &&
                 !vm.noData &&
+                childNodeWrapperHeight > wrapperHeight &&
                 wrapperHeight + el.scrollTop >= childNodeWrapperHeight
               // childNodeWrapperHeight !== 0
               ) {
