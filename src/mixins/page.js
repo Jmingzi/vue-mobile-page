@@ -20,7 +20,8 @@ export default {
           beforeCallback,
           afterCallback,
           throttleTime,
-          loadingOpen
+          loadingOpen,
+          loadFirst
         } = binding.value
         // 父容器
         let wrapperHeight
@@ -47,8 +48,8 @@ export default {
           childNode &&
           childNode.classList.contains(childWrapperCls)
         ) {
-          // 初次加载
-          if (vm.currentPage === 1) {
+          if (vm.currentPage === 1 && loadFirst !== false) {
+            // 初次加载
             vm.doCallback(callback, beforeCallback, afterCallback)
           }
 
@@ -57,7 +58,6 @@ export default {
             vm.throttle(() => {
               wrapperHeight = el.offsetHeight
               childNodeWrapperHeight = childNode.offsetHeight
-              // console.log(wrapperHeight, el.scrollTop, childNodeWrapperHeight)
               if (
                 !vm.pageLoading &&
                 !vm.noData &&

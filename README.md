@@ -19,7 +19,7 @@ npm install vue-mobile-page --save
 ```
 
 ### 工作流程
-`binding`指令的时候会去执行一次`beforeCallback` -> `callback` -> `afterCallback`流程。  
+`binding`指令的时候会去执行一次`beforeCallback` -> `callback` -> `afterCallback`流程。
 其他场景——需要手动执行，提供了`doCallback`(详见method说明)方法
 
 ### Usage
@@ -28,10 +28,10 @@ wrapper-item 包裹子容器，用来获取高度offsetHeight
 
 ```vue
 <template>
-<div 
-  class="wrapper" 
-  v-page="{ 
-    wrapperCls: 'wrapper-item', 
+<div
+  class="wrapper"
+  v-page="{
+    wrapperCls: 'wrapper-item',
     callback: getList,
     beforeCallback: beforeGetList,
     afterCallback: afterGetList
@@ -48,7 +48,7 @@ import page from 'vue-mobile-page'
 
 export default {
   mixins: [ page ],
-  
+
   methods: {
     getList(pageCb) {
       console.log('currentPage', this.currentPage)
@@ -56,11 +56,11 @@ export default {
       // 此回调必须，用来更新分页状态
       pageCb && pageCb(currentPageData)
     },
-    
+
     beforeGetList() {
       // ...
     },
-    
+
     afterGetList(isNoData) {
       // ...
     }
@@ -73,6 +73,7 @@ export default {
 
 参数名|描述|默认值
 ---|---|---
+loadFirst|首次是否自动加载|true
 childWrapperCls|子容器类名，用来校验Dom结构的合理性|''
 callback|分页回调|''
 beforeCallback|分页前的回调，例如可以用来控制请求开关|''
