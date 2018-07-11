@@ -84,6 +84,12 @@ export default {
     }
   },
 
+  created() {
+    // "foobar".includes("foo")
+    console.log([1].keys())
+    new Promise()
+  },
+
   methods: {
     doCallback(callback, beforeCallback, afterCallback) {
       beforeCallback && beforeCallback()

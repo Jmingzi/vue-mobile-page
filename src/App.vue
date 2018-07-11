@@ -20,7 +20,9 @@
 
 <script>
   import page from './mixins/page'
-  import SlideDel from '../m-dist/mSlideDelete'
+  // import SlideDel from '../m-dist/mSlideDelete'
+  import SlideDel from './components/SlideDelete'
+  // import "babel-polyfill"
 
   export default {
     name: 'app',
